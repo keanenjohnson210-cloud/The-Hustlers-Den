@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#111318">
+  <meta name="description" content="Find local service providers and small businesses around Cape Town with THE HUSTLE DEN.">
+  <title>THE HUSTLE DEN | Cape Town services</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <style>
+    :root { color-scheme: dark; --bg:#101216; --panel:#191c23; --panel2:#20242d; --text:#f6f7fb; --muted:#aab0bd; --accent:#c7ff43; --line:#303541; --danger:#ff7777; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:radial-gradient(ellipse at top right,#252d18 0,transparent 38%),var(--bg); color:var(--text); font:16px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif; }
+    button,input,select,textarea { font:inherit; }
+    button,a { -webkit-tap-highlight-color:transparent; }
+    a { color:inherit; }
+    .wrap { max-width:1050px; margin:auto; padding:18px 16px 92px; }
+    header { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:8px 0 22px; }
+    .brand { display:flex; align-items:center; gap:10px; min-width:0; }
+    .logo { width:44px;height:44px; flex:none; display:grid;place-items:center;background:var(--accent);color:#111318;font-weight:1000;border-radius:14px;letter-spacing:-2px; }
+    .brandname { font-size:14px;line-height:1.05;font-weight:950;letter-spacing:.07em; }
+    .brandname span { color:var(--accent); }
+    .location-pill { border:1px solid var(--line); background:#171a20; color:var(--muted); border-radius:99px; padding:8px 11px; font-size:12px; white-space:nowrap; }
+    .hero { padding:25px 0 22px; }
+    .eyebrow { color:var(--accent);font-size:12px;letter-spacing:.17em;font-weight:850;text-transform:uppercase; }
+    h1 { font-size:clamp(32px,8vw,57px);line-height:.98;letter-spacing:-.055em;margin:10px 0 14px;max-width:720px; }
+    h1 em { color:var(--accent);font-style:normal; }
+    .hero p { color:var(--muted);max-width:570px;margin:0 0 20px; }
+    .searchbar { display:flex;gap:8px;max-width:720px; }
+    input,select,textarea { width:100%;background:#11141a;color:var(--text);border:1px solid var(--line);border-radius:12px;padding:13px 14px;outline:none; }
+    input:focus,select:focus,textarea:focus { border-color:var(--accent); }
+    .searchbar input { min-width:0; }
+    .btn { border:0;border-radius:12px;padding:12px 15px;background:var(--accent);color:#12150c;font-weight:850;cursor:pointer; }
+    .btn.secondary { background:var(--panel2);border:1px solid var(--line);color:var(--text); }
+    .btn.small { padding:9px 12px;font-size:13px; }
+    .btn:active { transform:scale(.98); }
+    section { margin-top:26px; }
+    .section-head { display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:13px; }
+    h2 { font-size:20px;letter-spacing:-.025em;margin:0; }
+    .muted { color:var(--muted);font-size:13px; }
+    .categories { display:flex;gap:8px;overflow-x:auto;padding:2px 0 8px;scrollbar-width:thin; }
+    .chip { flex:none;border:1px solid var(--line);background:var(--panel);color:var(--muted);padding:9px 13px;border-radius:99px;cursor:pointer; }
+    .chip.active { background:var(--accent);color:#13160d;border-color:var(--accent);font-weight:850; }
+    .grid { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px; }
+    .card { background:linear-gradient(145deg,#1c2028,#171a20);border:1px solid var(--line);border-radius:18px;padding:15px;min-width:0;display:flex;flex-direction:column;gap:10px; }
+    .card-top { display:flex;align-items:start;justify-content:space-between;gap:8px; }
+    .avatar { width:44px;height:44px;display:grid;place-items:center;border-radius:13px;background:#2b3121;color:var(--accent);font-size:21px;flex:none; }
+    .tag { display:inline-flex;align-items:center;gap:5px;border:1px solid #3c4727;color:var(--accent);background:#222919;border-radius:99px;padding:4px 7px;font-size:10px;font-weight:800; }
+    .card h3 { margin:0;font-size:17px;line-height:1.2;overflow-wrap:anywhere; }
+    .card .category { color:var(--accent);font-size:12px;font-weight:750; }
+    .card .description { color:var(--muted);font-size:13px;flex:1; }
+    .meta { display:flex;align-items:flex-start;gap:7px;color:var(--muted);font-size:12px; }
+    .actions { display:flex;gap:7px;margin-top:3px; }
+    .actions a { flex:1;text-align:center;text-decoration:none;border-radius:10px;padding:10px 7px;background:var(--accent);color:#11140b;font-size:12px;font-weight:900; }
+    .actions a.ghost { background:#252a33;color:var(--text);border:1px solid var(--line); }
+    .empty { grid-column:1/-1;text-align:center;border:1px dashed var(--line);border-radius:16px;padding:30px 18px;color:var(--muted); }
+    .notice { background:#25251c;border:1px solid #555632;color:#d9dfb2;padding:12px 14px;border-radius:13px;font-size:12px;margin-top:20px; }
+    .cta { background:var(--accent);color:#13160c;border-radius:20px;padding:22px;display:flex;align-items:center;justify-content:space-between;gap:15px; }
+    .cta h2 { font-size:24px;max-width:450px; }
+    .cta p { margin:7px 0 0;max-width:490px;font-size:13px;opacity:.8; }
+    .cta .btn { background:#111318;color:white;flex:none; }
+    .modal-backdrop { position:fixed;inset:0;background:#000b;display:none;align-items:flex-end;justify-content:center;z-index:20;padding:0; }
+    .modal-backdrop.open { display:flex; }
+    .modal { width:100%;max-width:650px;max-height:92vh;overflow:auto;background:#191c23;border:1px solid var(--line);border-radius:22px 22px 0 0;padding:22px 18px calc(22px + env(safe-area-inset-bottom)); }
+    .modal-head { display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px; }
+    .close { border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:10px;padding:8px 12px;cursor:pointer; }
+    .form-grid { display:grid;grid-template-columns:1fr 1fr;gap:12px; }
+    .field { display:flex;flex-direction:column;gap:6px; }
+    .field label { color:var(--muted);font-size:12px;font-weight:700; }
+    .field.full { grid-column:1/-1; }
+    textarea { min-height:90px;resize:vertical; }
+    .form-note { font-size:12px;color:var(--muted);margin:12px 0; }
+    .toast { position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#f4f5f7;color:#101216;padding:12px 16px;border-radius:12px;font-size:13px;font-weight:800;display:none;z-index:40;max-width:90%; }
+    nav.bottom { position:fixed;bottom:0;left:0;right:0;z-index:10;background:#111318f2;border-top:1px solid var(--line);display:flex;justify-content:center;padding:10px 12px calc(10px + env(safe-area-inset-bottom));backdrop-filter:blur(12px); }
+    .navinner { width:100%;max-width:650px;display:flex;justify-content:space-around;gap:10px; }
+    .navinner button { border:0;background:transparent;color:var(--muted);font-size:11px;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer; }
+    .navinner button strong { font-size:20px;line-height:1;color:var(--accent); }
+    footer { color:var(--muted);font-size:11px;text-align:center;padding:28px 0 8px; }
+    @media(max-width:720px) { .grid{grid-template-columns:repeat(2,minmax(0,1fr));} .card{padding:12px;} .cta{align-items:flex-start;flex-direction:column;} }
+    @media(max-width:430px) { .grid{grid-template-columns:1fr;} .searchbar{flex-direction:column;} .location-pill{font-size:11px;padding:7px 9px;} .form-grid{grid-template-columns:1fr;} .field.full{grid-column:auto;} }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand"><div class="logo">HD</div><div class="brandname">THE <span>HUSTLE</span><br>DEN</div></div>
+      <div class="location-pill">📍 CAPE TOWN, ZA</div>
+    </header>
+    <main>
+      <div class="hero">
+        <div class="eyebrow">Local talent. Real hustle.</div>
+        <h1>Find your next<br><em>go-to pro.</em></h1>
+        <p>Discover local service providers and small businesses around Cape Town. Search, connect and support local hustle.</p>
+        <div class="searchbar">
+          <input id="searchInput" type="search" placeholder="Try “plumber” or “Bellville”…" aria-label="Search businesses">
+          <button class="btn" id="searchBtn">Search</button>
+        </div>
+      </div>
+      <section>
+        <div class="section-head"><h2>Browse categories</h2><span class="muted">Tap to filter</span></div>
+        <div class="categories" id="categories"></div>
+      </section>
+      <section id="directory">
+        <div class="section-head"><div><h2>Local businesses</h2><div class="muted" id="resultCount">Browse local providers</div></div><button class="btn secondary small" id="clearFilters">Reset</button></div>
+        <div class="grid" id="businessGrid"></div>
+      </section>
+      <section>
+        <div class="cta">
+          <div><h2>Got a business? Get seen.</h2><p>Add your business to THE HUSTLE DEN and help more Cape Town customers find you.</p></div>
+          <button class="btn" id="openSubmit">List my business ↗</button>
+        </div>
+      </section>
+      <div class="notice"><strong>Demo version:</strong> The example listings are fictional placeholders. Business submissions are saved only in this browser on this device; they are not sent to a shared directory yet. Do not enter sensitive personal information.</div>
+    </main>
+    <footer>THE HUSTLE DEN · Cape Town, South Africa<br>Built to support local businesses.</footer>
+  </div>
+  <nav class="bottom"><div class="navinner">
+    <button id="navHome"><strong>⌂</strong>Home</button>
+    <button id="navSearch"><strong>⌕</strong>Search</button>
+    <button id="navList"><strong>＋</strong>List business</button>
+  </div></nav>
+  <div class="modal-backdrop" id="submitModal" role="dialog" aria-modal="true" aria-labelledby="formTitle">
+    <div class="modal">
+      <div class="modal-head"><div><div class="eyebrow">Join the directory</div><h2 id="formTitle">List your business</h2></div><button class="close" id="closeSubmit" aria-label="Close form">✕</button></div>
+      <form id="businessForm">
+        <div class="form-grid">
+          <div class="field"><label for="bizName">Business name *</label><input id="bizName" required maxlength="80" placeholder="e.g. Cape Town Plumbing"></div>
+          <div class="field"><label for="bizCategory">Category *</label><select id="bizCategory" required></select></div>
+          <div class="field"><label for="bizArea">Town / suburb *</label><input id="bizArea" required maxlength="80" placeholder="e.g. Bellville"></div>
+          <div class="field"><label for="bizPhone">Phone number *</label><input id="bizPhone" required type="tel" maxlength="25" placeholder="e.g. 082 123 4567"></div>
+          <div class="field"><label for="bizWhatsApp">WhatsApp number</label><input id="bizWhatsApp" type="tel" maxlength="25" placeholder="Optional"></div>
+          <div class="field"><label for="bizWebsite">Website / social link</label><input id="bizWebsite" type="url" placeholder="https://..."></div>
+          <div class="field full"><label for="bizAddress">Address or service area</label><input id="bizAddress" maxlength="150" placeholder="Street address or areas you serve"></div>
+          <div class="field full"><label for="bizDescription">What do you do? *</label><textarea id="bizDescription" required maxlength="400" placeholder="Describe your services, experience and hours..."></textarea></div>
+        </div>
+        <p class="form-note">Your details will be saved locally on this device for this demo. A live launch needs a shared database and a review process before listings appear to everyone.</p>
+        <button class="btn" type="submit" style="width:100%">Save business listing</button>
+      </form>
+    </div>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+<script>
+(() => {
+  const categories = ["All","Plumbing","Electrical","Cleaning","Gardening","Automotive","Beauty","Building","Tutoring","Other"];
+  const demoBusinesses = [
+    {id:"demo1",name:"Cape Town Plumbing Co.",category:"Plumbing",area:"Bellville",phone:"082 000 1001",whatsapp:"0820001001",address:"Bellville and northern suburbs",description:"Demo listing: leak repairs, blocked drains and general plumbing.",demo:true},
+    {id:"demo2",name:"BrightSpark Electrical",category:"Electrical",area:"Goodwood",phone:"082 000 1002",whatsapp:"0820001002",address:"Goodwood, Parow and nearby areas",description:"Demo listing: household electrical repairs and installations.",demo:true},
+    {id:"demo3",name:"FreshStart Cleaning",category:"Cleaning",area:"Cape Town CBD",phone:"082 000 1003",whatsapp:"0820001003",address:"City Bowl and Atlantic Seaboard",description:"Demo listing: home, move-in and small-office cleaning.",demo:true},
+    {id:"demo4",name:"GreenThumb Garden Care",category:"Gardening",area:"Kuils River",phone:"082 000 1004",whatsapp:"0820001004",address:"Kuils River and surrounding suburbs",description:"Demo listing: garden maintenance, trimming and clean-ups.",demo:true},
+    {id:"demo5",name:"QuickFix Auto Assist",category:"Automotive",area:"Parow",phone:"082 000 1005",whatsapp:"0820001005",address:"Parow and northern suburbs",description:"Demo listing: basic vehicle servicing and repair enquiries.",demo:true},
+    {id:"demo6",name:"Glow Up Studio",category:"Beauty",area:"Mitchells Plain",phone:"082 000 1006",whatsapp:"0820001006",address:"Mitchells Plain and nearby areas",description:"Demo listing: beauty services by appointment.",demo:true},
+    {id:"demo7",name:"SolidBuild Home Repairs",category:"Building",area:"Athlone",phone:"082 000 1007",whatsapp:"0820001007",address:"Athlone and Cape Flats",description:"Demo listing: small repairs, painting and home maintenance.",demo:true},
+    {id:"demo8",name:"Study Buddy Tutoring",category:"Tutoring",area:"Rondebosch",phone:"082 000 1008",whatsapp:"0820001008",address:"Southern Suburbs and online",description:"Demo listing: school subject support and study skills.",demo:true}
+  ];
+  const icons = {All:"✦",Plumbing:"🔧",Electrical:"⚡",Cleaning:"🧽",Gardening:"🌿",Automotive:"🚗",Beauty:"✂️",Building:"🧱",Tutoring:"📚",Other:"＋"};
+  let activeCategory = "All";
+  const $ = id => document.getElementById(id);
+  const escapeHTML = value => String(value ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  const getCustom = () => { try { return JSON.parse(localStorage.getItem("thd_businesses") || "[]"); } catch { return []; } };
+  const allBusinesses = () => [...getCustom(), ...demoBusinesses];
+  const phoneDigits = value => String(value || "").replace(/\D/g,"");
+  const toWhatsApp = value => { let d=phoneDigits(value); if(d.startsWith("0")) d="27"+d.slice(1); return d; };
+  function safeURL(value) { try { const u = new URL(value); return ["http:","https:"].includes(u.protocol) ? u.href : ""; } catch { return ""; } }
+  function showToast(message) { const t=$("toast");t.textContent=message;t.style.display="block";clearTimeout(showToast.timer);showToast.timer=setTimeout(()=>t.style.display="none",3200); }
+  function renderCategories() {
+    $("categories").innerHTML = categories.map(c=>`<button class="chip ${activeCategory===c?"active":""}" data-category="${escapeHTML(c)}">${icons[c]||"•"} ${escapeHTML(c)}</button>`).join("");
+    $("categories").querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{activeCategory=b.dataset.category;renderCategories();renderBusinesses();}));
+  }
+  function renderBusinesses() {
+    const query=$("searchInput").value.trim().toLowerCase();
+    const results=allBusinesses().filter(b=>(activeCategory==="All"||b.category===activeCategory)&&[b.name,b.category,b.area,b.address,b.description].join(" ").toLowerCase().includes(query));
+    $("resultCount").textContent=`${results.length} ${results.length===1?"listing":"listings"} · Cape Town area`;
+    $("businessGrid").innerHTML = results.length ? results.map(b=>{
+      const digits=phoneDigits(b.phone);
+      const wa=toWhatsApp(b.whatsapp||b.phone);
+      const mapQuery=encodeURIComponent([b.address,b.area,"Cape Town, South Africa"].filter(Boolean).join(", "));
+      const web=safeURL(b.website);
+      return `<article class="card">
+        <div class="card-top"><div class="avatar">${icons[b.category]||"✦"}</div>${b.demo?'<span class="tag">SAMPLE</span>': '<span class="tag">LOCAL</span>'}</div>
+        <div><div class="category">${escapeHTML(b.category)}</div><h3>${escapeHTML(b.name)}</h3></div>
+        <div class="meta">📍 <span>${escapeHTML(b.area)}${b.address?` · ${escapeHTML(b.address)}`:""}</span></div>
+        <div class="description">${escapeHTML(b.description)}</div>
+        <div class="actions"><a href="tel:${digits}" aria-label="Call ${escapeHTML(b.name)}">Call</a><a class="ghost" href="https://wa.me/${wa}" target="_blank" rel="noopener">WhatsApp</a></div>
+        <div class="actions"><a class="ghost" href="https://www.google.com/maps/search/?api=1&query=${mapQuery}" target="_blank" rel="noopener">Map / directions</a>${web?`<a class="ghost" href="${escapeHTML(web)}" target="_blank" rel="noopener">Website</a>`:""}</div>
+      </article>`;
+    }).join("") : `<div class="empty"><div style="font-size:28px;margin-bottom:8px">⌕</div><strong>No listings found</strong><p>Try another search or category. If you run a local business, you can add a listing below.</p><button class="btn small" id="emptyAdd">List my business</button></div>`;
+    const emptyAdd=$("emptyAdd"); if(emptyAdd) emptyAdd.addEventListener("click",openModal);
+  }
+  function openModal() { $("submitModal").classList.add("open"); document.body.style.overflow="hidden"; }
+  function closeModal() { $("submitModal").classList.remove("open"); document.body.style.overflow=""; }
+  $("bizCategory").innerHTML=categories.filter(c=>c!=="All").map(c=>`<option value="${escapeHTML(c)}">${escapeHTML(c)}</option>`).join("");
+  $("searchBtn").addEventListener("click",renderBusinesses);
+  $("searchInput").addEventListener("input",renderBusinesses);
+  $("clearFilters").addEventListener("click",()=>{activeCategory="All";$("searchInput").value="";renderCategories();renderBusinesses();});
+  $("openSubmit").addEventListener("click",openModal);
+  $("navList").addEventListener("click",openModal);
+  $("closeSubmit").addEventListener("click",closeModal);
+  $("submitModal").addEventListener("click",e=>{if(e.target===$("submitModal"))closeModal();});
+  $("navHome").addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));
+  $("navSearch").addEventListener("click",()=>{$("searchInput").focus();window.scrollTo({top:0,behavior:"smooth"});});
+  $("businessForm").addEventListener("submit",e=>{
+    e.preventDefault();
+    const item={
+      id:"local_"+Date.now(),name:$("bizName").value.trim(),category:$("bizCategory").value,area:$("bizArea").value.trim(),
+      phone:$("bizPhone").value.trim(),whatsapp:$("bizWhatsApp").value.trim(),website:safeURL($("bizWebsite").value.trim()),
+      address:$("bizAddress").value.trim(),description:$("bizDescription").value.trim(),demo:false
+    };
+    if(!item.name||!item.category||!item.area||!item.phone||!item.description){showToast("Please complete all required fields.");return;}
+    const items=getCustom();items.unshift(item);
+    try { localStorage.setItem("thd_businesses",JSON.stringify(items)); }
+    catch { showToast("Could not save on this device. Browser storage may be full.");return; }
+    $("businessForm").reset();closeModal();activeCategory="All";$("searchInput").value="";renderCategories();renderBusinesses();showToast("Saved on this device. It is not yet public to other users.");window.scrollTo({top:document.getElementById("directory").offsetTop,behavior:"smooth"});
+  });
+  renderCategories();renderBusinesses();
+  if("serviceWorker" in navigator && location.protocol.startsWith("http")) window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));
+})();
+</script>
+</body>
+</html>
